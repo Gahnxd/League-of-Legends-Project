@@ -1,4 +1,4 @@
-# League of Legends Side and Ban Picks Analysis
+<!-- # League of Legends Side and Ban Picks Analysis -->
 
 Authors: Nathaphat Taleongpong, Gahn Wuwong
 
@@ -127,7 +127,7 @@ We got a p-value of 0, which is lower than the significance level, so we reject 
 **Significance Level**: 0.05
 
 <iframe
-  src="assets/Missingness2_TVD.html"
+  src="/assets/Missingness2_TVD.html"
   width="650"
   height="420"
   frameborder="0"
