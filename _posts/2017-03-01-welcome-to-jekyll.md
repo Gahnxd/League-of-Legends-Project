@@ -48,17 +48,15 @@ The bar chart,"Distribution of Games per Match", there is a pattern which looks 
 The bar chart, "Distribution of Sides", was plotted to make sure that there was an equal number of sides between all the games (Red equals Blue). The bar chart confirmed that there was data which was missing for this, therefore we were able to continue with our data analysis.
 
 
-test
-
 <iframe
-  src="assets/Univariate_GPerM.html"
+  src="/assets/Univariate_GPerM.html"
   width="650"
   height="420"
   frameborder="0"
 ></iframe>
 
 <iframe
-  src="assets/Univariate_Sides.html"
+  src="/assets/Univariate_Sides.html"
   width="650"
   height="420"
   frameborder="0"
@@ -68,7 +66,7 @@ test
 ## Bivariate Analysis
 
 <iframe
-  src="assets/Bivariate_SideWinRate.html"
+  src="/assets/Bivariate_SideWinRate.html"
   width="650"
   height="420"
   frameborder="0"
@@ -76,7 +74,7 @@ test
 
 
 <iframe
-  src="assets/Bivariate_BannedWinRate.html"
+  src="/assets/Bivariate_BannedWinRate.html"
   width="650"
   height="420"
   frameborder="0"
@@ -110,7 +108,7 @@ We believe that the columns `ban1` to `ban5` is NMAR because players can choose 
 **Significance Level**: 0.05
 
 <iframe
-  src="assets/Missingness_TVD.html"
+  src="/assets/Missingness_TVD.html"
   width="650"
   height="420"
   frameborder="0"
