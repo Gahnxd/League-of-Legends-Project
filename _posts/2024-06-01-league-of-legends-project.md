@@ -138,6 +138,8 @@ We got a p-value of 0, which is lower than the significance level, so we reject 
   frameborder="0"
 ></iframe>
 
+![title](/assets/Missingness2_TVD.html)
+
 The p-value is 0, which is lower than the significance level, so we reject the null hypothesis. This means that the missingness in `ban4` and `ban5` is dependent on `year-month`.
 
 This dependency on year and month is due to the seasonal changes in the format of the game. Moving forward, we will be using the game's latest ban format, so we will remove any games that previously only had 2 bans and 3 bans. Additionally, to make the data easier to use and analyze, we will only include games where both teams banned 5 characters.
