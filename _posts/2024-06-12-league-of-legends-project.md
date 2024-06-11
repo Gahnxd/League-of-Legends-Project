@@ -1,4 +1,8 @@
 <!-- # League of Legends Side and Ban Picks Analysis -->
+---
+title:  "League of Legends Side and Ban Picks Analysis"
+layout: post
+---
 
 Authors: Nathaphat Taleongpong, Gahn Wuwong
 
