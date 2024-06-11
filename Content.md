@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: "League of Legends Side and Ban Picks Analysis"
 ---
 
