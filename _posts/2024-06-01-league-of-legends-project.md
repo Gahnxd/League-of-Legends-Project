@@ -46,7 +46,7 @@ The columns of interest to me are `'gameid, game, side, result, league, teamname
 
 # Data Cleaning and Exploratory Data Analysis
 
-## Data Cleaning
+### Data Cleaning
 
 The data cleaning process began with removing incomplete data, we took out rows in `datacompleteness` that weren't labeled as 'complete'. This ensured that most of the columns will have all data in them, however, we also checked to ensure that all data was actually complete as well. Following this, only the relevant columns specified in our columns of interest were kept.
 
@@ -65,7 +65,7 @@ Overall, these cleaning steps were essential for preparing the dataset for analy
 |  4 | ESPORTSTMNT01_2690210 |      1 | Blue   |        0 | LCKC     | Fredit BRION Challengers | oe:team:68911b3329146587617ab2973106e23 | Loopy        | oe:player:e9741b3a238723ea6380ef2113fae63 |               5 | 2022-01-10 07:44:08 | Leona      | Karma  | Caitlyn | Syndra | Thresh | Lulu   |       3836 |     3588 |       28 |            443 |         -497 |            7 |           1 |             2 |            2 |
 
 
-## Univariate Analysis
+### Univariate Analysis
 
 The bar chart,"Distribution of Games per Match", there is a pattern which looks similar to a right-skew towards single-game matches, with over 400,000 instances. As the number of games per match increases, the number of matches sharply decreases, which means matches with 5 games are significantly less common.
 
@@ -89,7 +89,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ></iframe>
 
 
-## Bivariate Analysis
+### Bivariate Analysis
 
 <iframe
   src="../assets/Bivariate_SideWinRate.html"
@@ -107,7 +107,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ></iframe>
 
 
-## Interesting Aggregates 
+### Interesting Aggregates 
 
 | side   |   Aatrox |   Ahri |   Akali |   Akshan |   Alistar | ... |      Zoe |     Zyra |
 |--------|----------|--------|---------|----------|-----------|-----|---------:|---------:|
@@ -117,11 +117,11 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 # Assessment of Missingness
 
-## NMAR Analysis
+### NMAR Analysis
 
 We believe that the columns `ban1` to `ban5` is NMAR because players can choose to ban or not to ban. However, the game format may have changed over time, so we will explore whether the missingness in the ban columns are MAR depending on the year and month.
 
-## Missingness Dependency
+### Missingness Dependency
 
 **MAR Depending on Year**
 
