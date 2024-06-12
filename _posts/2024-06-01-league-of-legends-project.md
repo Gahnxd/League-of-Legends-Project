@@ -1,5 +1,5 @@
 ---
-title: "League of Legends Project"
+title: "League of Legends Side and Ban Picks Analysis"
 layout: post
 ---
 
@@ -85,28 +85,6 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 
 ## Interesting Aggregates
-
-<!-- <style>
-    .table-container {
-        max-height: none; /* Adjust this value as needed */
-        overflow: hidden; /* This will hide the vertical scrollbar */
-        display: inline-block;
-        width: 100%;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        word-wrap: break-word;
-    }
-    th, td {
-        max-width: 100px; /* Adjust this value as needed */
-    }
-</style> -->
 
 <div class="table-container">
 <table>
