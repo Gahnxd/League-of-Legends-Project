@@ -4,7 +4,7 @@
 @import index, font, basic, layout, classes
 
 html
-  background: lighten($dark, 70%)
+  background: lighten($light, 70%)
   padding: 0 calc(38% - 22em)
 
 body
@@ -18,7 +18,7 @@ body > header, body > footer
   body > header, body > article, body > footer
     padding: 1.75em calc(22% - 6em)
 
-@media (prefers-color-scheme: dark)
+@media (prefers-color-scheme: light)
   html
     background: darken($dark, 4%)
   body > header, body > footer
