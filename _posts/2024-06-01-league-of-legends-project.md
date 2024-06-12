@@ -8,36 +8,38 @@ layout: post
 
 # Introduction
 
-In this project, we perform data analysis and utilize machine learning techniques on a League of Legends dataset, with a particular emphasis on champion bans, the starting side on the map, and their impact on game outcomes.
+In this project, we perform data analysis and utilize machine learning techniques on a League of Legends dataset, with a particular emphasis on champion picks, the starting side on the map, and their impact on game outcomes.
 
-League of Legends (LoL) is a strategy game with two teams battling against one another to destroy their bases. The dataset in this study is from Oracle's Exilir containing data of over 10,000 LoL competitive matches. The main focus will be between the years 2023-2024.
+League of Legends is a strategy game where two teams compete to destroy each other's bases. The dataset used in this study is from Oracle's Elixir containing data of over 10,000 competitive matches between 2022-2024.
 
-In LoL before the match begins, a team is given a side that they start on, blue or red. In the game, the blue side corresponds to your botlane having the blue buff monster, whilst the red side the botlane has the red buff monster. This can change or shift the team composition. The central question we pose is *The prediction of the result of the match depending on the side and numerical data within the first 15 minutes of the game*. This allows coaches to determine which team has the current advantage.
+In League of Legends, before the match begins, each team is assigned a starting side: blue or red. The blue side's botlane has the blue buff monster, while the red side's botlane has the red buff monster. These differences can influence the team composition and the outcome of the game. Our central question is *How does the side, champion picks, and early game team stats impact the result of the game?*. Answering this question will allows coaches to determine which team has the current advantage.
 
 ### General Data Information
 
-The data consists of 326592 rows and 131 columns as we are only using the dataset of 2023 and 2024. The relevant columns we use in this study are: 
+The original dataset consists of 326,592 rows and 131 columns, as we are focusing on data from 2022 to 2024. The relevant columns used in this study are:
 
-The columns of interest to me are `'gameid, game, side, result, league, teamname, teamid, date, champion, ban1, ban2, ban3, ban4, ban5, goldat15, xpat15, csat15, golddiffat15, xpdiffat15, csdiffat15, killsat15, assistsat15, deathsat15'`
+`gameid, game, side, result, league, teamname, teamid, date, champion, ban1, ban2, ban3, ban4, ban5, goldat15, xpat15, csat15, golddiffat15, xpdiffat15, csdiffat15, killsat15, assistsat15, deathsat15`    
+
+After dropping irrelevant rows and columns, we are left with 268,740 rows and 23 columns.
 
 **Description of Columns:**
 
-- `gameid`: Identifier for a game.
-- `game`: Game number of a match.
-- `side`: The team's side in the game.
-- `result`: Outcome of the game.
-- `league`: The league that the game was played.
+- `gameid`: Unique identifier for each game.
+- `game`: Game number in a match series.
+- `side`: The team's starting side (blue or red).
+- `result`: Outcome of the game (win or loss).
+- `league`: The league in which the game was played.
 - `teamname`: Name of the team.
-- `teamid`: Unique identifier for team.
-- `date`: Date when the game happened.
-- `champion`: Champion chosen by player
-- `ban1, ban2, ban3, ban4, ban5`: Columns ban1, ban2, ban3, ban4, ban5 is what each team picked to ban.
-- `goldat15`: Gold of player at 15 minutes.
-- `xpat15`: XP of player at 15 minutes.
-- `csat15`: Minions killed at 15 minutes.
-- `golddiffat15`: Difference in gold between the positions in team1 and team2 at the 15 minutes.
-- `xpdiffat15`: Difference in experience points between positions in team1 and team2 at the 15 minutes.
-- `csdiffat15`: Difference in creep score between the team1 and team2 at the 15 minutes.
+- `teamid`: Unique identifier for the team.
+- `date`: Date when the game took place.
+- `champion`: Champion chosen by the player
+- `ban1, ban2, ban3, ban4, ban5`: Champions banned by the team.
+- `goldat15`: Gold accumulated by the player at 15 minutes.
+- `xpat15`: Experience points accumulated by player at 15 minutes.
+- `csat15`: Minions killed by the player 15 minutes.
+- `golddiffat15`: Difference in gold between the players in team1 and team2 at the 15 minutes.
+- `xpdiffat15`: Difference in experience points between players in team1 and team2 at the 15 minutes.
+- `csdiffat15`: Difference in creep score between players in team1 and team2 at the 15 minutes.
 - `killsat15`: Number of kills achieved by the player at the 15 minutes.
 - `assistsat15`: Number of assists achieved by the player at the 15 minutes.
 - `deathsat15`: Number of deaths suffered by the player at the 15 minutes.
@@ -48,13 +50,13 @@ The columns of interest to me are `'gameid, game, side, result, league, teamname
 
 ### Data Cleaning
 
-The data cleaning process began with removing incomplete data, we took out rows in `datacompleteness` that weren't labeled as 'complete'. This ensured that most of the columns will have all data in them, however, we also checked to ensure that all data was actually complete as well. Following this, only the relevant columns specified in our columns of interest were kept.
+The data cleaning process began with removing incomplete data by excluding rows where `datacompleteness` wasn't labeled as `'complete'`. This step ensured that most of the columns will not have incomplete data. However, some of the data was still missing, so we proceeded by dropping irrelevant columns that were not part of our columns of interest.
 
-The date column was converted into datetime format, which allow us to perform any date analysis if required. Subsequently, the index was reset to ensure it was continuous and started from zero. Then we filtered out games without a game ID, as the game ID serves as a fundamental identifier for tracking individual games throughout the analysis.
+Next, the `date` column was converted into datetime format, enabling us to perform any date-related analysis if required. We also filtered out games with missing `gameid`, since identifying and tracking individual games is essential for our study.
 
-We also found that there was 24 rows (same game ID) had missing data in `golddiffat15', xpat15` were removed. Additionally, games without complete ban picks were dropped, as this information is essential for understanding team strategies and dynamics during matches.
+Then we removed 24 rows (from the same sets of games) that had missing data in the columns `golddiffat15`, `xpat15`, `csdiffat15`, `killsat15`, `assistsat15`,`deathsat15`. Since these columns could be significant factors in determining the game's outcome, we decided to not impute the values. Finally, we dropped games without complete ban picks to ensure that the dataset is aligned with the latest game format.
 
-Overall, these cleaning steps were essential for preparing the dataset for analysis, ensuring that only high-quality, complete data was used. By removing incomplete or erroneous entries and standardizing the data format, the cleaned dataset provides a solid foundation for meaningful analysis and insights into the dynamics of the games.
+Overall, these steps provided us with clean data to begin our analysis. The first few rows of the cleaned DataFrame are shown below:
 
 |    | gameid                |   game | side   |   result | league   | teamname                 | teamid                                  | playername   | playerid                                  |   participantid | date                | champion   | ban1   | ban2    | ban3   | ban4   | ban5   |   goldat15 |   xpat15 |   csat15 |   golddiffat15 |   xpdiffat15 |   csdiffat15 |   killsat15 |   assistsat15 |   deathsat15 |
 |---:|:----------------------|-------:|:-------|---------:|:---------|:-------------------------|:----------------------------------------|:-------------|:------------------------------------------|----------------:|:--------------------|:-----------|:-------|:--------|:-------|:-------|:-------|-----------:|---------:|---------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|
@@ -67,12 +69,7 @@ Overall, these cleaning steps were essential for preparing the dataset for analy
 
 ### Univariate Analysis
 
-The bar chart,"Distribution of Games per Match", there is a pattern which looks similar to a right-skew towards single-game matches, with over 400,000 instances. As the number of games per match increases, the number of matches sharply decreases, which means matches with 5 games are significantly less common.
-
-
-
-The bar chart, "Distribution of Sides", was plotted to make sure that there was an equal number of sides between all the games (Red equals Blue). The bar chart confirmed that there was data which was missing for this, therefore we were able to continue with our data analysis.
-
+The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 400,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
 
 <iframe
   src="../assets/Univariate_GPerM.html"
@@ -80,6 +77,8 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
   height="420"
   frameborder="0"
 ></iframe>
+
+The "Distribution of Sides" histogram was plotted to ensure an equal distribution of sides between all the games. The x-axis represents the sides (Blue and Red), while the y-axis represents the count of games. The chart shows that the number of games starting on the Blue side is equal to the number of games starting on the Red side. This confirmed that there was no significant imbalance or missing data regarding the starting sides, allowing us to proceed with our data analysis.
 
 <iframe
   src="../assets/Univariate_Sides.html"
@@ -91,6 +90,8 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 ### Bivariate Analysis
 
+The "Win Rate by Side" pie chart shows the percentage of wins based on the starting side of a team. The chart shows that the Blue side has a higher win rate of 52.7%, while the Red side has a win rate of 47.3%. This indicates that teams starting on the Blue side tend to win more often compared to those starting on the Red side.
+
 <iframe
   src="../assets/Bivariate_SideWinRate.html"
   width="650"
@@ -98,6 +99,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
   frameborder="0"
 ></iframe>
 
+The "Win Rate by Banned Character" bar chart shows how the win rate of a team varies depending on the champion they chose to ban. The x-axis lists the banned characters, while the y-axis represents the win rate. The chart shows that banning certain champions, like Yorick and Warwick, correlates with higher win rates. This analysis helps identify whether there are significant outliers in win rates based on banned champions, indicating strategic advantages in banning specific characters.
 
 <iframe
   src="../assets/Bivariate_BannedWinRate.html"
@@ -109,11 +111,14 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 ### Interesting Aggregates 
 
+This aggregate is a pivot table comparing the win rates of different champions when played on the blue side versus the red side. The purpose of this table is to identify which champions yield the highest win rates and to determine if either side has a significant advantage. There seems to be a trend of the blue side generally having higher win rates then the red side. This pattern is consistent across most champions, indicating that the blue side tends to have a higher overall win rate.
+
 | side   |   Aatrox |   Ahri |   Akali |   Akshan |   Alistar | ... |      Zoe |     Zyra |
 |--------|----------|--------|---------|----------|-----------|-----|---------:|---------:|
 | Blue   | 0.516355 | 0.5396 | 0.5361  | 0.5756   | 0.5612    | ... | 0.534146 | 0.473684 |
 | Red    | 0.467016 | 0.4869 | 0.473   | 0.5208   | 0.4745    | ... | 0.466125 | 0.421053 |
 
+The table highlights the comparative advantage of the blue side over the red side for various champions, providing insights into potential strategic decisions in champion selection and game planning.
 
 # Assessment of Missingness
 
@@ -165,6 +170,8 @@ This dependency on year and month is due to the seasonal changes in the format o
 
 # Hypothesis Testing
 
+In our hypothesis test, we wanted to determine whether there is a difference between the chances of winning for teams starting on the Red versus the Blue side. This analysis is crucial in ensuring fairness for both starting sides in a competitive environment. Ideally, the win rates for both sides should be relatively similar, however, we will investigate whether the difference in win rates are statisically significant or not.
+
 **Question**: Do both blue and red teams have the same chance of winning?       
 
 **Null Hypothesis**: Blue and red teams have the same chances of winning.       
@@ -175,6 +182,8 @@ This dependency on year and month is due to the seasonal changes in the format o
 
 **Significance Level**: 0.05        
 
+To conduct this hypothesis test, we first calculated the absolute difference in observed win rates between blue and red teams. Then we simulated the win rates under the null hypothesis, which assumes that both sides have the same chance of winning (50/50). This process was repeated numerous times to generate a distribution of win rate differences under the null hypothesis. Finally, we calculated the p-value by comparing the observed absolute difference to this simulated distribution.
+
 <iframe
   src="../assets/HypothesisTest.html"
   width="650"
@@ -182,9 +191,7 @@ This dependency on year and month is due to the seasonal changes in the format o
   frameborder="0"
 ></iframe>
 
-The p-value is 0, which is lower than the significance level, so we reject the null hypothesis. This means that blue and red teams don't have the same chances of winning. 
-
-We suspect that this might be because of the format of the bans pick, since the blue team gets to pick some of their bans before the red team.
+The "Distribution of Win Rate Differences" histogram shows the simulated distribution of win rate differences under the null hypothesis. The observed difference is marked on the right side of the chart. The p-value calculated from this test is 0, which is lower than the significance level of 0.05. Therefore, we reject the null hypothesis, concluding that blue and red teams do not have the same chances of winning. Factors such as the format of bans and picks, where the blue team gets to select some of their bans before the Red team, might contribute to this observed difference.
 
 # Framing a Prediction Problem
 
@@ -203,6 +210,15 @@ We will be using a CatBoost Classifier to predict the game's outcome based on th
 We will use accuracy to evaluate our model. Accuracy is chosen because the proportions of wins and losses are nearly balanced (47% for red and 53% for blue), making it an appropriate metric to assess the model's overall performance in correctly predicting game outcomes. Accuracy provides a clear and direct measure of the model's effectiveness.
 
 # Baseline Model
+
+For the baseline model we decided to use RandomForestClassifier (RFC) with two nominal features: `champion` and `side`. Since the available champions are predetermined, we do not need to worry about data leakage between training and testing sets. This allowed us to manually performed one-hot encoding on the `champion` feature before fitting the model pipeline. We also one-hot encoded the `side` feature to represent the starting side as a numerical value. Then we split our dataset into training and testing sets, with 20% of the data allocated to testing. We then trained the RFC on the training data and evaluated its performance using accuracy on the testing data. We still need to improve it to be able to generalize better by improving hyperparameters and adding more features in.
+
+|Training Accuracy|Testing Accuracy|
+|---|---|
+|0.6397|0.5220|
+
+The model's training accuracy indicates that it performed reasonably well on the training data. However, the testing accuracy is around 52%, which is only slightly better than randomly guessing beased on side. This suggests that the model's performance drops on unseen data and that the side and champion picks alone are not sufficient to predict the game's outcome. To improve generalization, we plan to optimize hyperparameters and add more numerical features in the final model.
+
 # Final Model
 ### Feature Engineering
 
