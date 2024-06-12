@@ -132,7 +132,7 @@ We got a p-value of 0, which is lower than the significance level, so we reject 
 **Significance Level**: 0.05
 
 <iframe
-  src="Missingness2_TVD.html"
+  src="../assets/Missingness2_TVD.html"
   width="650"
   height="420"
   frameborder="0"
