@@ -12,7 +12,7 @@ In this project, we perform data analysis and utilize machine learning technique
 
 League of Legends is a strategy game where two teams compete to destroy each other's bases. The dataset used in this study is from Oracle's Elixir containing data of over 10,000 competitive matches between 2022-2024.
 
-In League of Legends, before the match begins, each team is assigned a starting side: blue or red. The blue side's botlane has the blue buff monster, while the red side's botlane has the red buff monster. These differences can influence the team composition and the outcome of the game. Our central question is *How does the side, champion picks, and early game team stats impact the result of the game?*. Answering this question will allows coaches to determine which team has the current advantage.
+In League of Legends, before the match begins, each team is assigned a starting side: blue or red. The blue side's botlane has the blue buff monster, while the red side's botlane has the red buff monster. These differences can influence the team composition and the outcome of the game. Our central question is *How does the side, champion picks, and early game team stats impact the result of the game?* Answering this question will allows coaches to determine which team has the current advantage.
 
 ### General Data Information
 
