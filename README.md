@@ -1,6 +1,7 @@
 # League of Legends Side and Ban Picks Analysis
 
 **Authors**: Nathaphat Taleongpong, Gahn Wuwong
+**Website**: [link](https://gahnxd.github.io/League-of-Legends-Project/)
 
 # Introduction
 
