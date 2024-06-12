@@ -86,7 +86,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 ## Interesting Aggregates
 
-<style>
+<!-- <style>
     .table-container {
         max-height: none; /* Adjust this value as needed */
         overflow: hidden; /* This will hide the vertical scrollbar */
@@ -106,7 +106,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
     th, td {
         max-width: 100px; /* Adjust this value as needed */
     }
-</style>
+</style> -->
 
 <div class="table-container">
 <table>
