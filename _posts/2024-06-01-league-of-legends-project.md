@@ -88,9 +88,9 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 <style>
     .table-container {
-        max-height: 200px; /* Adjust this value as needed */
+        max-height: none; /* Adjust this value as needed */
         overflow: hidden; /* This will hide the vertical scrollbar */
-        display: block;
+        display: inline-block;
         width: 100%;
     }
     table {
