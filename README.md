@@ -5,36 +5,38 @@
 
 # Introduction
 
-In this project, we perform data analysis and utilize machine learning techniques on a League of Legends dataset, with a particular emphasis on champion bans, the starting side on the map, and their impact on game outcomes.
+In this project, we perform data analysis and utilize machine learning techniques on a League of Legends dataset, with a particular emphasis on champion picks, the starting side on the map, and their impact on game outcomes.
 
-League of Legends (LoL) is a strategy game with two teams battling against one another to destroy their bases. The dataset in this study is from Oracle's Exilir containing data of over 10,000 LoL competitive matches. The main focus will be between the years 2023-2024.
+League of Legends is a strategy game where two teams compete to destroy each other's bases. The dataset used in this study is from Oracle's Elixir containing data of over 10,000 competitive matches between 2022-2024.
 
-In LoL before the match begins, a team is given a side that they start on, blue or red. In the game, the blue side corresponds to your botlane having the blue buff monster, whilst the red side the botlane has the red buff monster. This can change or shift the team composition. The central question we pose is *The prediction of the result of the match depending on the side and numerical data within the first 15 minutes of the game*. This allows coaches to determine which team has the current advantage.
+In League of Legends, before the match begins, each team is assigned a starting side: blue or red. The blue side's botlane has the blue buff monster, while the red side's botlane has the red buff monster. These differences can influence the team composition and the outcome of the game. Our central question is *How does the side, champion picks, and early game team stats impact the result of the game?*. Answering this question will allows coaches to determine which team has the current advantage.
 
 ### General Data Information
 
-The data consists of 326592 rows and 131 columns as we are only using the dataset of 2023 and 2024. The relevant columns we use in this study are: 
+The original dataset consists of 326,592 rows and 131 columns, as we are focusing on data from 2022 to 2024. The relevant columns used in this study are:
 
-The columns of interest to me are `'gameid, game, side, result, league, teamname, teamid, date, champion, ban1, ban2, ban3, ban4, ban5, goldat15, xpat15, csat15, golddiffat15, xpdiffat15, csdiffat15, killsat15, assistsat15, deathsat15'`
+`gameid, game, side, result, league, teamname, teamid, date, champion, ban1, ban2, ban3, ban4, ban5, goldat15, xpat15, csat15, golddiffat15, xpdiffat15, csdiffat15, killsat15, assistsat15, deathsat15`    
+
+After dropping irrelevant rows and columns, we are left with 268,740 rows and 23 columns.
 
 **Description of Columns:**
 
-- `gameid`: Identifier for a game.
-- `game`: Game number of a match.
-- `side`: The team's side in the game.
-- `result`: Outcome of the game.
-- `league`: The league that the game was played.
+- `gameid`: Unique identifier for each game.
+- `game`: Game number in a match series.
+- `side`: The team's starting side (blue or red).
+- `result`: Outcome of the game (win or loss).
+- `league`: The league in which the game was played.
 - `teamname`: Name of the team.
-- `teamid`: Unique identifier for team.
-- `date`: Date when the game happened.
-- `champion`: Champion chosen by player
-- `ban1, ban2, ban3, ban4, ban5`: Columns ban1, ban2, ban3, ban4, ban5 is what each team picked to ban.
-- `goldat15`: Gold of player at 15 minutes.
-- `xpat15`: XP of player at 15 minutes.
-- `csat15`: Minions killed at 15 minutes.
-- `golddiffat15`: Difference in gold between the positions in team1 and team2 at the 15 minutes.
-- `xpdiffat15`: Difference in experience points between positions in team1 and team2 at the 15 minutes.
-- `csdiffat15`: Difference in creep score between the team1 and team2 at the 15 minutes.
+- `teamid`: Unique identifier for the team.
+- `date`: Date when the game took place.
+- `champion`: Champion chosen by the player
+- `ban1, ban2, ban3, ban4, ban5`: Champions banned by the team.
+- `goldat15`: Gold accumulated by the player at 15 minutes.
+- `xpat15`: Experience points accumulated by player at 15 minutes.
+- `csat15`: Minions killed by the player 15 minutes.
+- `golddiffat15`: Difference in gold between the players in team1 and team2 at the 15 minutes.
+- `xpdiffat15`: Difference in experience points between players in team1 and team2 at the 15 minutes.
+- `csdiffat15`: Difference in creep score between players in team1 and team2 at the 15 minutes.
 - `killsat15`: Number of kills achieved by the player at the 15 minutes.
 - `assistsat15`: Number of assists achieved by the player at the 15 minutes.
 - `deathsat15`: Number of deaths suffered by the player at the 15 minutes.
@@ -43,15 +45,15 @@ The columns of interest to me are `'gameid, game, side, result, league, teamname
 
 # Data Cleaning and Exploratory Data Analysis
 
-## Data Cleaning
+### Data Cleaning
 
-The data cleaning process began with removing incomplete data, we took out rows in `datacompleteness` that weren't labeled as 'complete'. This ensured that most of the columns will have all data in them, however, we also checked to ensure that all data was actually complete as well. Following this, only the relevant columns specified in our columns of interest were kept.
+The data cleaning process began with removing incomplete data by excluding rows where `datacompleteness` wasn't labeled as `'complete'`. This step ensured that most of the columns will not have incomplete data. However, some of the data was still missing, so we proceeded by dropping irrelevant columns that were not part of our columns of interest.
 
-The date column was converted into datetime format, which allow us to perform any date analysis if required. Subsequently, the index was reset to ensure it was continuous and started from zero. Then we filtered out games without a game ID, as the game ID serves as a fundamental identifier for tracking individual games throughout the analysis.
+Next, the `date` column was converted into datetime format, enabling us to perform any date-related analysis if required. We also filtered out games with missing `gameid`, since identifying and tracking individual games is essential for our study.
 
-We also found that there was 24 rows (same game ID) had missing data in `golddiffat15', xpat15` were removed. Additionally, games without complete ban picks were dropped, as this information is essential for understanding team strategies and dynamics during matches.
+Then we removed 24 rows (from the same sets of games) that had missing data in the columns `golddiffat15`, `xpat15`, `csdiffat15`, `killsat15`, `assistsat15`,`deathsat15`. Since these columns could be significant factors in determining the game's outcome, we decided to not impute the values. Finally, we dropped games without complete ban picks to ensure that the dataset is aligned with the latest game format.
 
-Overall, these cleaning steps were essential for preparing the dataset for analysis, ensuring that only high-quality, complete data was used. By removing incomplete or erroneous entries and standardizing the data format, the cleaned dataset provides a solid foundation for meaningful analysis and insights into the dynamics of the games.
+Overall, these steps provided us with clean data to begin our analysis. The first few rows of the cleaned DataFrame are shown below:
 
 |    | gameid                |   game | side   |   result | league   | teamname                 | teamid                                  | playername   | playerid                                  |   participantid | date                | champion   | ban1   | ban2    | ban3   | ban4   | ban5   |   goldat15 |   xpat15 |   csat15 |   golddiffat15 |   xpdiffat15 |   csdiffat15 |   killsat15 |   assistsat15 |   deathsat15 |
 |---:|:----------------------|-------:|:-------|---------:|:---------|:-------------------------|:----------------------------------------|:-------------|:------------------------------------------|----------------:|:--------------------|:-----------|:-------|:--------|:-------|:-------|:-------|-----------:|---------:|---------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|
@@ -62,14 +64,9 @@ Overall, these cleaning steps were essential for preparing the dataset for analy
 |  4 | ESPORTSTMNT01_2690210 |      1 | Blue   |        0 | LCKC     | Fredit BRION Challengers | oe:team:68911b3329146587617ab2973106e23 | Loopy        | oe:player:e9741b3a238723ea6380ef2113fae63 |               5 | 2022-01-10 07:44:08 | Leona      | Karma  | Caitlyn | Syndra | Thresh | Lulu   |       3836 |     3588 |       28 |            443 |         -497 |            7 |           1 |             2 |            2 |
 
 
-## Univariate Analysis
+### Univariate Analysis
 
-The bar chart,"Distribution of Games per Match", there is a pattern which looks similar to a right-skew towards single-game matches, with over 400,000 instances. As the number of games per match increases, the number of matches sharply decreases, which means matches with 5 games are significantly less common.
-
-
-
-The bar chart, "Distribution of Sides", was plotted to make sure that there was an equal number of sides between all the games (Red equals Blue). The bar chart confirmed that there was data which was missing for this, therefore we were able to continue with our data analysis.
-
+The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 400,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
 
 <iframe
   src="../assets/Univariate_GPerM.html"
@@ -77,6 +74,8 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
   height="420"
   frameborder="0"
 ></iframe>
+
+The "Distribution of Sides" histogram was plotted to ensure an equal distribution of sides between all the games. The x-axis represents the sides (Blue and Red), while the y-axis represents the count of games. The chart shows that the number of games starting on the Blue side is equal to the number of games starting on the Red side. This confirmed that there was no significant imbalance or missing data regarding the starting sides, allowing us to proceed with our data analysis.
 
 <iframe
   src="../assets/Univariate_Sides.html"
@@ -86,7 +85,9 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ></iframe>
 
 
-## Bivariate Analysis
+### Bivariate Analysis
+
+The "Win Rate by Side" pie chart shows the percentage of wins based on the starting side of a team. The chart shows that the Blue side has a higher win rate of 52.7%, while the Red side has a win rate of 47.3%. This indicates that teams starting on the Blue side tend to win more often compared to those starting on the Red side.
 
 <iframe
   src="../assets/Bivariate_SideWinRate.html"
@@ -95,6 +96,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
   frameborder="0"
 ></iframe>
 
+The "Win Rate by Banned Character" bar chart shows how the win rate of a team varies depending on the champion they chose to ban. The x-axis lists the banned characters, while the y-axis represents the win rate. The chart shows that banning certain champions, like Yorick and Warwick, correlates with higher win rates. This analysis helps identify whether there are significant outliers in win rates based on banned champions, indicating strategic advantages in banning specific characters.
 
 <iframe
   src="../assets/Bivariate_BannedWinRate.html"
@@ -104,21 +106,26 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ></iframe>
 
 
-## Interesting Aggregates 
+### Interesting Aggregates 
+
+This aggregate is a pivot table comparing the win rates of different champions when played on the blue side versus the red side. The purpose of this table is to identify which champions yield the highest win rates and to determine if either side has a significant advantage. There seems to be a trend of the blue side generally having higher win rates then the red side. This pattern is consistent across most champions, indicating that the blue side tends to have a higher overall win rate.
 
 | side   |   Aatrox |   Ahri |   Akali |   Akshan |   Alistar | ... |      Zoe |     Zyra |
 |--------|----------|--------|---------|----------|-----------|-----|---------:|---------:|
 | Blue   | 0.516355 | 0.5396 | 0.5361  | 0.5756   | 0.5612    | ... | 0.534146 | 0.473684 |
 | Red    | 0.467016 | 0.4869 | 0.473   | 0.5208   | 0.4745    | ... | 0.466125 | 0.421053 |
 
+The table highlights the comparative advantage of the blue side over the red side for various champions, providing insights into potential strategic decisions in champion selection and game planning.
 
 # Assessment of Missingness
 
-## NMAR Analysis
+### NMAR Analysis
 
-We believe that the columns `ban1` to `ban5` is NMAR because players can choose to ban or not to ban. However, the game format may have changed over time, so we will explore whether the missingness in the ban columns are MAR depending on the year and month.
+Many columns in the dataset have missing values, which could be atributed to the structure of the dataset where each game has 10 rows representing each player and 2 rows representing the overall team statistics. This structure results in missing values for the player-specific columns in the team rows. However, the missingness of these columns does not affect our analysis since we can manipulate the data to ensure the features are correctly represented.
 
-## Missingness Dependency
+Another pattern of missingness is observed in the columns `ban1` to `ban5`, which represent the champions banned by the team. We believe this missingness is Not Missing at Random (NMAR) because players have the option to ban or not to ban champions. However, the game format has changed over time, which could contribute to the missingness. To confirm this, we will explore whether the missingness in the ban columns is Missing At Random (MAR) depending on the year and month. By analyzing the missing data patterns across different time periods, we can determine if the missingness correlates with specific years and months, indicating that changes in the game format influences the missingness of the ban data. The result of this analysis will help us decide how to handle the missing data in the ban columns to appropriately use them in our models.
+
+### Missingness Dependency
 
 **MAR Depending on Year**
 
@@ -130,6 +137,8 @@ We believe that the columns `ban1` to `ban5` is NMAR because players can choose 
 
 **Significance Level**: 0.05
 
+To test the hypothesis, we calculated the observed total variation distance (TVD) between the distribution of `year` by missing and not missing `ban4` and `ban5`. Next, we simulated the missingness of `ban4` and `ban5` under the null hypothesis, which assumes that the missingness is not dependent on `year`. This process was repeated numerous times to generate a distribution of total variation distances under the null hypothesis. Finally, we calculated the p-value by comparing the observed TVD to the simulated distribution.
+
 <iframe
   src="../assets/Missingness_TVD.html"
   width="650"
@@ -137,7 +146,7 @@ We believe that the columns `ban1` to `ban5` is NMAR because players can choose 
   frameborder="0"
 ></iframe>
 
-We got a p-value of 0, which is lower than the significance level, so we reject the null hypothesis. This means that `ban4` and `ban5` is dependent on `year`.
+The "Distribution of TVD" histogram shows the simulated distribution of TVD under the null hypothesis. The observed TVD is marked on the right side of the chart. The p-value calculated from this test is 0, which is lower than the significance level of 0.05. Therefore, we reject the null hypothesis, which assumed that the missingness in `ban4` and `ban5` is not dependent on `year`. This is likely due to changes in the game format over time, which influences the ban data. In order have a more detailed analysis, we will also explore the missingness dependency on the specific month of each year.
 
 **MAR Depending on Year and Month**
 
@@ -149,6 +158,8 @@ We got a p-value of 0, which is lower than the significance level, so we reject 
 
 **Significance Level**: 0.05
 
+For this hypothesis test, we extracted the month and year from the date column and combined them to create a new column `year-month`. This allows us to group the data by year and month and analyze the missingness pattern. Again, we calculated the observed total variation distance (TVD) betwen the distribution of `year-month` by missing and not missing `ban4` and `ban5`. We then simulated the missingness of `ban4` and `ban5` under the null hypothesis, which assumes that the missingness is not dependent on `year-month`. We repeated this process numerous times to generate a distribution of total variation distances under the null hypothesis. Finally, we calculated the p-value by comparing the observed TVD to the simulated distribution.
+
 <iframe
   src="../assets/Missingness2_TVD.html"
   width="650"
@@ -156,11 +167,13 @@ We got a p-value of 0, which is lower than the significance level, so we reject 
   frameborder="0"
 ></iframe>
 
-The p-value is 0, which is lower than the significance level, so we reject the null hypothesis. This means that the missingness in `ban4` and `ban5` is dependent on `year-month`.
+The "Distribution of TVD" histogram shows the simulated distribution of TVD under the null hypothesis. The observed TVD is marked on the right side of the chart. The p-value calculated from this test is 0, which is lower than the significance level of 0.05. Therefore, we reject the null hypothesis, which assumed that the missingness in `ban4` and `ban5` is not dependent on `year-month`.
 
-This dependency on year and month is due to the seasonal changes in the format of the game. Moving forward, we will be using the game's latest ban format, so we will remove any games that previously only had 2 bans and 3 bans. Additionally, to make the data easier to use and analyze, we will only include games where both teams banned 5 characters.
+This dependency on year and month is likely due to seasonal changes in the format of the game. Moving forward, we will be using the game's latest ban format, so we will remove any games that previously only had only 2 or 3 bans. Additionally, to make the data easier to use and analyze, we will only include games where both teams banned 5 characters.
 
 # Hypothesis Testing
+
+In our hypothesis test, we wanted to determine whether there is a difference between the chances of winning for teams starting on the Red versus the Blue side. This analysis is crucial in ensuring fairness for both starting sides in a competitive environment. Ideally, the win rates for both sides should be relatively similar, however, we will investigate whether the difference in win rates are statisically significant or not.
 
 **Question**: Do both blue and red teams have the same chance of winning?       
 
@@ -172,6 +185,8 @@ This dependency on year and month is due to the seasonal changes in the format o
 
 **Significance Level**: 0.05        
 
+To conduct this hypothesis test, we first calculated the absolute difference in observed win rates between blue and red teams. Then we simulated the win rates under the null hypothesis, which assumes that both sides have the same chance of winning (50/50). This process was repeated numerous times to generate a distribution of win rate differences under the null hypothesis. Finally, we calculated the p-value by comparing the observed absolute difference to this simulated distribution.
+
 <iframe
   src="../assets/HypothesisTest.html"
   width="650"
@@ -179,36 +194,56 @@ This dependency on year and month is due to the seasonal changes in the format o
   frameborder="0"
 ></iframe>
 
-The p-value is 0, which is lower than the significance level, so we reject the null hypothesis. This means that blue and red teams don't have the same chances of winning. 
-
-We suspect that this might be because of the format of the bans pick, since the blue team gets to pick some of their bans before the red team.
+The "Distribution of Win Rate Differences" histogram shows the simulated distribution of win rate differences under the null hypothesis. The observed difference is marked on the right side of the chart. The p-value calculated from this test is 0, which is lower than the significance level of 0.05. Therefore, we reject the null hypothesis, which assumed that blue and red teams have the same chances of winning. Factors such as the format of bans and picks, where the blue team gets to select some of their bans before the Red team, might contribute to this observed difference.
 
 # Framing a Prediction Problem
 
-Since the blue and red teams have different chances of winning, we aim to explore whether this bias can be leveraged to predict the game's outcome. To enhance the prediction's accuracy, we will also use the bans as features. Bans are crucial to the game and are the only information we have before the game starts, given the absence of data on picks. 
+Since the blue and red teams have different chances of winning, we aim to explore whether this bias can be leveraged to predict the game's outcome. To enhance the prediction's accuracy, we will also use champion picks as features. Picks are crucial to the game and are one of the few pieces of information we have at the beginning of the game. 
 
 **Prediction Problem**      
-Our prediction problem is a classification task. Specifically, we are performing binary classification to predict the outcome of a game (win or loss) based on the side and bans.
+Our prediction problem is a classification task. Specifically, we are performing binary classification to predict the outcome of a game (win or loss) based on the side and champion picks.
 
 **Response Variable**       
 The response variable is the game's result, which can be either a win (1) or a loss (0).
 
 **Model**       
-We will be using a CatBoost Classifier to predict the game's outcome based on the side and bans. The reason we chose the CatBoost Classifier is because it can handle categories that appear in the test set but were not present in the training set. This capability is particularly important is our dataset where the banned characters might vary between training and testing sets.
+We will be using a RandomForest Classifier to predict the game's outcome based on the side and champion picks. RandomForest is a powerful ensemble learning method that can handle non-linear relationships and interactions between features. It is also robust to overfitting and can handle high-dimensional data.
 
 **Evaluation Metric**       
 We will use accuracy to evaluate our model. Accuracy is chosen because the proportions of wins and losses are nearly balanced (47% for red and 53% for blue), making it an appropriate metric to assess the model's overall performance in correctly predicting game outcomes. Accuracy provides a clear and direct measure of the model's effectiveness.
 
 # Baseline Model
+
+For the baseline model we decided to use RandomForestClassifier (RFC) with two nominal features: `champion` and `side`. Since the available champions are predetermined, we do not need to worry about data leakage between training and testing sets. This allowed us to manually performed one-hot encoding on the `champion` feature before fitting the model pipeline. We also one-hot encoded the `side` feature to represent the starting side as a numerical value. Then we split our dataset into training and testing sets, with 20% of the data allocated to testing. We then trained the RFC on the training data and evaluated its performance using accuracy on the testing data. We still need to improve it to be able to generalize better by improving hyperparameters and adding more features in.
+
+|Training Accuracy|Testing Accuracy|
+|---|---|
+|0.6397|0.5220|
+
+The model's training accuracy indicates that it performed reasonably well on the training data. However, the testing accuracy is around 52%, which is only slightly better than randomly guessing beased on side. This suggests that the model's performance drops on unseen data and that the side and champion picks alone are not sufficient to predict the game's outcome. To improve generalization, we plan to optimize hyperparameters and add more numerical features in the final model.
+
 # Final Model
 ### Feature Engineering
 
+In the final model, we increased our model's performance by introducing more numerical features within the data. We added the differences in gold, experience points, and minions killed at 15 minutes into the game in order to better determine if a team has an advantage early on in the game. We also included the total number of kills, assists, and death in the first 15 minutes to better predict the probability of the team winning. Additionally, we also included the game number of the match to takeinto account of the stamina of the players. 
 
-We decided to experiment with more numerical features within the data. We added the difference in gold, xp, and cs at 15 minutes into the game in order to better determine if the team has an advantage early on in the game. We will also use the number of kills, assists, and death in the first 15 minutes to better predict the probability of the team winning. Additionally, we also included the game number of the match to takeinto account of the stamina of the players.
+We used the one-hot encoded `champion` and `side` feature again in this model. We then used the standard scaler to scale the numerical features. Finally we fit the model using the RandomForestClassifier with the following hyperparameters:
+
+|Hyperparameters|Value|
+|---|---|
+|n_estimators|100|
+|max_depth|25|
+|min_samples_leaf|5|
+
+We then evaluated the model's performance using accuracy on the testing data.
+
+|Training Accuracy|Testing Accuracy|
+|---|---|
+|0.8026|0.7479|
 
 ### Grid Search Cross Validation
 
-**Hyperparameters**     
+To further improve the model's performance, we performed Grid Search Cross Validation to optimize the hyperparameters. We used the following hyperparameters:  
 
 `n_estimators`: Number of decision trees. More iterations can capture more patterns but increase training time.    
 
@@ -218,6 +253,35 @@ We decided to experiment with more numerical features within the data. We added 
 
 `max_features`: The function used to decide how many features to consider when fitting. Helps prevent overfitting.  
 
+We used the same features and scaling as the model mentioned above. We then performed Grid Search Cross Validation with 5 folds with the following hyperparameters:
+
+|Hyperparameters|Values|
+|---|---|
+|n_estimators| 75, 100, 125|
+|max_depth| 20, 25, 30|
+|min_samples_leaf| 6, 9, 12|
+|max_features| sqrt, log2|
+
+The best hyperparameters found were:
+
+|Hyperparameters|Values|
+|---|---|
+|n_estimators| 125|
+|max_depth| 20|
+|min_samples_leaf| 9|
+|max_features| log2|
+
+The performance of the model with the optimized hyperparameters is as follows:
+
+|Training Accuracy|Testing Accuracy|
+|---|---|
+|0.7493|0.7473|
+
+Our final model achieved a training accuracy of 74.93% and a testing accuracy of 74.73%, showing a 22% increase in testing accuracy compared to the baseline model. By including additional features and optimizing hyperparameters, the model was able to generalize better to unseen data and predict the game's outcome based on side, champion picks, and early game tem statistics with acceptable accuracy. 
+
+A potential limitation of the model is that it may not account for all factors influencing the game's outcome, such as player skill, team coordination, and in-game strategies.
+However, the model provides valuable insights into the impact of side, champion picks, and early game team stats on the game's result. These insights can help optimize team strategies and improve performance in competitive play.
+
 <iframe
   src="../assets/Confusion.html"
   width="650"
@@ -225,8 +289,24 @@ We decided to experiment with more numerical features within the data. We added 
   frameborder="0"
 ></iframe>
 
+The confusion matrix shows the model's performance on the testing data. The model correctly predicted 2,763 wins and 2,816 losses, while misclassifying 967 wins as losses and 920 losses as wins. The model's precision is 75% and recall is 74%. This indicates that the model has a good balance between precision and recall, correctly identifying the game's outcome in most cases.
 
 # Fairness Analysis
+
+In order to assess the fairness of our model in predicting the game's outcome, we performed a fairness test to determine if the model has similar performance for both blue and red sides. The fairness test compares the accuracy of the model for blue and red teams and determines if any differences are due to random chance.
+
+**Question**: Does my model have a similar performance for both blue and red sides?       
+
+**Null Hypothesis**: Our model is fair. The accuracy of the model is roughly the same for both sides and any differences are due to random chance.       
+
+**Alternative Hypothesis**: Our model is unfair. The accuracy of the model is significantly different for both sides.       
+
+**Test Statistic**: The absolute difference in accuracy between blue and red teams.      
+
+**Significance Level**: 0.05        
+
+To conduct this fairness analysis, we first calculated the absolute difference in accuracy between blue and red teams. Then we simulated the absolute difference in accuracy under the null hypothesis, which assumes that both sides have the same accuracy. This process was repeated numerous times to generate a distribution of accuracy differences under the null hypothesis. Finally, we calculated the p-value by comparing the observed absolute difference to this simulated distribution.
+
 <iframe
   src="../assets/FairnessTest.html"
   width="650"
@@ -234,4 +314,4 @@ We decided to experiment with more numerical features within the data. We added 
   frameborder="0"
 ></iframe>
 
-The p-value is higher than the significance level, so we fail to reject the null hypothesis. This means that our model is fair and the difference in accuracy between blue and red teams is due to random chance.
+The "Distribution of Absolute Difference in Accuracy" histogram shows the simulated distribution under the null hypothesis, with the observed difference marked in the middle of the distribution. The p-value calculated from this test is higher than the significance level of 0.05. Therefore, we fail to reject the null hypothesis, indicating that our model is fair and the difference in accuracy between blue and red teams is due to random chance.
