@@ -54,14 +54,14 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 
 <iframe
-  src="Univariate_GPerM.html"
+  src="../assets/Univariate_GPerM.html"
   width="650"
   height="420"
   frameborder="0"
 ></iframe>
 
 <iframe
-  src="Univariate_Sides.html"
+  src="../assets/Univariate_Sides.html"
   width="650"
   height="420"
   frameborder="0"
@@ -71,7 +71,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ## Bivariate Analysis
 
 <iframe
-  src="Bivariate_SideWinRate.html"
+  src="../assets/Bivariate_SideWinRate.html"
   width="650"
   height="420"
   frameborder="0"
@@ -79,19 +79,47 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 
 
 <iframe
-  src="Bivariate_BannedWinRate.html"
+  src="../assets/Bivariate_BannedWinRate.html"
   width="650"
   height="420"
   frameborder="0"
 ></iframe>
 
 
-## Interesting Aggregates 
+<h2>Interesting Aggregates</h2>
+<table>
+  <tr>
+    <th>side</th>
+    <th>Aatrox</th>
+    <th>Ahri</th>
+    <th>Akali</th>
+    <th>Akshan</th>
+    <th>Alistar</th>
+    <th>Zoe</th>
+    <th>Zyra</th>
+  </tr>
+  <tr>
+    <td>Blue</td>
+    <td>0.516355</td>
+    <td>0.5396</td>
+    <td>0.5361</td>
+    <td>0.5756</td>
+    <td>0.5612</td>
+    <td>0.534146</td>
+    <td>0.473684</td>
+  </tr>
+  <tr>
+    <td>Red</td>
+    <td>0.467016</td>
+    <td>0.4869</td>
+    <td>0.473</td>
+    <td>0.5208</td>
+    <td>0.4745</td>
+    <td>0.466125</td>
+    <td>0.421053</td>
+  </tr>
+</table>
 
-| side   |   Aatrox |   Ahri |   Akali |   Akshan |   Alistar | ... |      Zoe |     Zyra |
-|--------|----------|--------|---------|----------|-----------|-----|---------:|---------:|
-| Blue   | 0.516355 | 0.5396 | 0.5361  | 0.5756   | 0.5612    | ... | 0.534146 | 0.473684 |
-| Red    | 0.467016 | 0.4869 | 0.473   | 0.5208   | 0.4745    | ... | 0.466125 | 0.421053 |
 
 
 # Assessment of Missingness
@@ -113,7 +141,7 @@ We believe that the columns `ban1` to `ban5` is NMAR because players can choose 
 **Significance Level**: 0.05
 
 <iframe
-  src="Missingness_TVD.html"
+  src="../assets/Missingness_TVD.html"
   width="650"
   height="420"
   frameborder="0"
