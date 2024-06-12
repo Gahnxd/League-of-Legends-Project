@@ -1,5 +1,5 @@
 ---
-title: "League of Legends Side and Bans Picks Analysis"
+title: "League of Legends Project"
 layout: post
 ---
 
