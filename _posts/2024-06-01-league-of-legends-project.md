@@ -86,7 +86,24 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
 ></iframe>
 
 
-<h2>Interesting Aggregates</h2>
+## Interesting Aggregates
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        word-wrap: break-word;
+    }
+    th, td {
+        max-width: 100px; /* Adjust this value as needed */
+    }
+</style>
+
 <table>
   <tr>
     <th>side</th>
@@ -95,6 +112,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
     <th>Akali</th>
     <th>Akshan</th>
     <th>Alistar</th>
+    <th>...</th>
     <th>Zoe</th>
     <th>Zyra</th>
   </tr>
@@ -105,6 +123,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
     <td>0.5361</td>
     <td>0.5756</td>
     <td>0.5612</td>
+    <td>...</td>
     <td>0.534146</td>
     <td>0.473684</td>
   </tr>
@@ -115,6 +134,7 @@ The bar chart, "Distribution of Sides", was plotted to make sure that there was 
     <td>0.473</td>
     <td>0.5208</td>
     <td>0.4745</td>
+    <td>...</td>
     <td>0.466125</td>
     <td>0.421053</td>
   </tr>
