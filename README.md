@@ -66,8 +66,6 @@ Overall, these steps provided us with clean data to begin our analysis. The firs
 
 ### Univariate Analysis
 
-The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 400,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
-
 <iframe
   src="../assets/Univariate_GPerM.html"
   width="650"
@@ -75,7 +73,7 @@ The "Distribution of Games per Match" histogram illustrates the frequency of mat
   frameborder="0"
 ></iframe>
 
-The "Distribution of Sides" histogram was plotted to ensure an equal distribution of sides between all the games. The x-axis represents the sides (Blue and Red), while the y-axis represents the count of games. The chart shows that the number of games starting on the Blue side is equal to the number of games starting on the Red side. This confirmed that there was no significant imbalance or missing data regarding the starting sides, allowing us to proceed with our data analysis.
+The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 400,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
 
 <iframe
   src="../assets/Univariate_Sides.html"
@@ -84,10 +82,10 @@ The "Distribution of Sides" histogram was plotted to ensure an equal distributio
   frameborder="0"
 ></iframe>
 
+The "Distribution of Sides" histogram was plotted to ensure an equal distribution of sides between all the games. The x-axis represents the sides (Blue and Red), while the y-axis represents the count of games. The chart shows that the number of games starting on the Blue side is equal to the number of games starting on the Red side. This confirmed that there was no significant imbalance or missing data regarding the starting sides, allowing us to proceed with our data analysis.
+
 
 ### Bivariate Analysis
-
-The "Win Rate by Side" pie chart shows the percentage of wins based on the starting side of a team. The chart shows that the Blue side has a higher win rate of 52.7%, while the Red side has a win rate of 47.3%. This indicates that teams starting on the Blue side tend to win more often compared to those starting on the Red side.
 
 <iframe
   src="../assets/Bivariate_SideWinRate.html"
@@ -96,7 +94,7 @@ The "Win Rate by Side" pie chart shows the percentage of wins based on the start
   frameborder="0"
 ></iframe>
 
-The "Win Rate by Banned Character" bar chart shows how the win rate of a team varies depending on the champion they chose to ban. The x-axis lists the banned characters, while the y-axis represents the win rate. The chart shows that banning certain champions, like Yorick and Warwick, correlates with higher win rates. This analysis helps identify whether there are significant outliers in win rates based on banned champions, indicating strategic advantages in banning specific characters.
+The "Win Rate by Side" pie chart shows the percentage of wins based on the starting side of a team. The chart shows that the Blue side has a higher win rate of 52.7%, while the Red side has a win rate of 47.3%. This indicates that teams starting on the Blue side tend to win more often compared to those starting on the Red side.
 
 <iframe
   src="../assets/Bivariate_BannedWinRate.html"
@@ -104,6 +102,8 @@ The "Win Rate by Banned Character" bar chart shows how the win rate of a team va
   height="420"
   frameborder="0"
 ></iframe>
+
+The "Win Rate by Banned Character" bar chart shows how the win rate of a team varies depending on the champion they chose to ban. The x-axis lists the banned characters, while the y-axis represents the win rate. The chart shows that banning certain champions, like Yorick and Warwick, correlates with higher win rates. This analysis helps identify whether there are significant outliers in win rates based on banned champions, indicating strategic advantages in banning specific characters.
 
 
 ### Interesting Aggregates 
