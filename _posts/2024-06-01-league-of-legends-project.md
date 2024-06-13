@@ -279,10 +279,9 @@ The performance of the model with the optimized hyperparameters is as follows:
 |---|---|
 |0.7493|0.7473|
 
-Our final model achieved a training accuracy of 74.93% and a testing accuracy of 74.73%, showing a 22% increase in testing accuracy compared to the baseline model. By including additional features and optimizing hyperparameters, the model was able to generalize better to unseen data and predict the game's outcome based on side, champion picks, and early game tem statistics with acceptable accuracy. 
+Our final model achieved a training accuracy of 74.93% and a testing accuracy of 74.73%, showing a 22% increase in testing accuracy compared to the baseline model. By including additional features and optimizing hyperparameters, the model was able to generalize better to unseen data and predict the game's outcome based on side, champion picks, and early game team statistics with acceptable accuracy. 
 
-A potential limitation of the model is that it may not account for all factors influencing the game's outcome, such as player skill, team coordination, and in-game strategies.
-However, the model provides valuable insights into the impact of side, champion picks, and early game team stats on the game's result. These insights can help optimize team strategies and improve performance in competitive play.
+A potential limitation of the model is that it may not account for all factors influencing the game's outcome, such as player skill, team coordination, and in-game strategies. However, the model provides valuable insights into the impact of side, champion picks, and early game team stats on the game's result. These insights can help optimize team strategies and improve performance in competitive play.
 
 <iframe
   src="../assets/Confusion.html"
