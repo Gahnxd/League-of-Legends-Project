@@ -76,7 +76,7 @@ Overall, these steps provided us with clean data to begin our analysis. The firs
   frameborder="0"
 ></iframe>
 
-The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 400,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
+The "Distribution of Games per Match" histogram illustrates the frequency of matches based on the number of games played per match in the dataset. The x-axis represents the number of games per match, ranging from 1 to 5, while the y-axis represents the count of matches. The chart shows that single-game matches are the most common, with over 180,000 instances. The frequency drops significantly for two-game matches and continues to decline for matches with 3, 4, and 5 games. Overall, the distribution is strongly right-skewed, indicating that most matches consist of just one game, with fewer matches involving multiple games.
 
 <iframe
   src="../assets/Univariate_Sides.html"
@@ -222,7 +222,7 @@ For the baseline model we decided to use RandomForestClassifier (RFC) with two n
 |---|---|
 |0.6397|0.5220|
 
-The model's training accuracy indicates that it performed reasonably well on the training data. However, the testing accuracy is around 52%, which is only slightly better than randomly guessing beased on side. This suggests that the model's performance drops on unseen data and that the side and champion picks alone are not sufficient to predict the game's outcome. To improve generalization, we plan to optimize hyperparameters and add more numerical features in the final model.
+The model's training accuracy indicates that it performed reasonably well on the training data. However, the testing accuracy is around 52%, which is only slightly better than randomly guessing based on side. This suggests that the model's performance drops on unseen data and that the side and champion picks alone are not sufficient to predict the game's outcome. To improve generalization, we plan to optimize hyperparameters and add more numerical features in the final model.
 
 # Final Model
 ### Feature Engineering
